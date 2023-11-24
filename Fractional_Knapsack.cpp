@@ -1,66 +1,60 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+int main(){
 
-int main()
-{
-    int n,w;
-    cin>>n>>w;
+    int n;
+    cin >> n;
 
+    double w;
+    cin >> w;
 
-    vector<float> pro(n),wei(n);
-    vector<pair<double,int> > rat;
+    vector<double> profit(n) , weight(n);
+    vector<pair<double,int>> Ratio;
 
-    for(int i=0;i<n;++i){
-        cin>>pro[i]>>wei[i];
+    for(int i = 0 ; i < n ; ++i){
+        cin >> profit[i];
     }
 
-    for(int i=0;i<n;++i){
-     rat.push_back(make_pair(pro[i]/wei[i],i));
+    for(int i = 0 ; i < n ; ++i){
+        cin >> weight[i];
     }
 
+    for(int i = 0; i < n ; ++i){
+        Ratio.push_back(make_pair(profit[i]/weight[i],i));
+    }
 
-    sort(rat.begin(),rat.end());
+    sort(Ratio.rbegin() , Ratio.rend());
 
-    double maxpro=0.0;
 
-    for(int i=n-1;i>=0 && w>0;--i){
-       if(wei[rat[i].second]<=w){
-        w-=wei[rat[i].second];
+    double maxprofit = 0.0;
+    double remainingWeight = w;
 
-        maxpro+=pro[rat[i].second];
+    for(int i = 0; i < n ; ++i){
+        
+       if(remainingWeight > 0){
 
-       }else{
-         double x1=wei[rat[i].second];
-         double x=min(double(w),double(x1));
+            double x = min(remainingWeight , weight[Ratio[i].second]);
+            remainingWeight -= x;
+            maxprofit += profit[Ratio[i].second] * (x/weight[Ratio[i].second]);
 
-         w-=x;
-         maxpro+=pro[rat[i].second] * (x/wei[rat[i].second]);
-
+       } else{
+          break;
        }
-       //cout<<rat[i].first<<" ";
     }
 
-    cout<<maxpro<<endl;
-
-
+    cout << maxprofit << endl;
 
 
 
 
     return 0;
 }
+
 /*
 
 7 15
-5
-1
-10 3
-15 5
-7 4
-8 1
-9 3
-4 2
-
+5 10 15 7 8 9 4
+1 3 5 4 1 3 2
 
 */
