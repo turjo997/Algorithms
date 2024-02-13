@@ -42,10 +42,7 @@ int main()
 {
 
          int nodes,edges;
-         cin>>nodes;
-
-         edges=nodes-1;
-
+         cin >> nodes >> edges;
 
          for(int i=1;i<=edges;i++){
                 int u,v;
