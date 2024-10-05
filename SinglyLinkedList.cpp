@@ -127,7 +127,7 @@ Node *delete_at_location(int len , int location , Node *head){
    }
 
    if(location > len){
-       cout << "Can not perform insert operation. Given location is greater than total length" << endl;
+       cout << "Can not perform delete operation. Given location is greater than total length" << endl;
    }
 
     for(int i = 1; i < location ; ++i){
