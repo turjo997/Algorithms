@@ -94,6 +94,30 @@ Node* delete_node(int data, Node* head){
         return head;
 }
 
+Node* delete_node2(vector<int>& nums, Node* head){
+        set<int> s;
+        for(int i = 0 ; i < nums.size() ; ++i){
+            s.insert(nums[i]);
+        }
+        Node *dummy = create_node(-1 , NULL);
+        Node *tmp = dummy , *cur = head;
+        //dummy -> next = tmp;
+        while(cur != NULL){
+            if(s.count(cur -> data)){
+                cur = cur -> next;
+            }else{
+                tmp -> next = cur;
+                tmp = tmp-> next;
+                cur = cur -> next;
+            }
+        }
+
+        //cout << tmp << endl;
+
+        tmp -> next = 0;
+        return dummy -> next;
+}
+
 
 int main(){
     Node *head = NULL;
@@ -119,9 +143,12 @@ int main(){
      }
 
     for(int i = 0 ; i < nums.size() ; ++i){
-        head = delete_node(nums[i] , head);
+       // head = delete_node(nums[i] , head);
     }
 
+
+     head = delete_node2(vector<int>& nums, head);  // this approach is more optimized and run in longer text cases
+   
      print_linked_list(head);
 
 
