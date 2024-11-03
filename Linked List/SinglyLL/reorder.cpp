@@ -219,7 +219,6 @@ Node* swapPairs(Node* head) {
 
 
 Node *addNumbers(Node *head1 , Node *head2){
-
     Node *cur1 = head1 , *cur2 = head2;
     Node *dummy = create_node(-1 , NULL);
     Node *p = dummy;
@@ -266,6 +265,43 @@ Node *addNumbers(Node *head1 , Node *head2){
 }
 
 
+
+
+Node *rotate_LL(Node *head , int k){
+    int len = countNodes(head);
+    if(k == len){
+        return head;
+    }
+
+    k = len - k;
+    Node *cur = head;
+
+    int i = 1;
+
+    Node *dummy = create_node(-1,0);
+    Node *p = dummy;
+
+    while(i < k && cur != NULL){
+        cur = cur -> next;
+        ++i;
+    }
+
+    cout << cur << endl;
+
+    while(cur != NULL){
+        p -> next = cur->next;
+        p = p -> next;
+        cur = cur -> next;
+    }
+
+
+    cur -> next = 0;
+    p = p -> next;
+    p -> next = head;
+
+    return dummy -> next;
+}
+
 int main(){
     Node *head = NULL;
     Node *head1 = NULL , *head2 = NULL;
@@ -278,18 +314,18 @@ int main(){
         head1 = create_node(x , head1);
     }
 
-   // print_linked_list(head1);
+    print_linked_list(head1);
 
     int m;
-    cin >> m;
+    //cin >> m;
 
     for(int i = 0 ; i < m ; ++i){
-        int x ; cin >> x;
-        head2 = create_node(x , head2);
+        //int x ; cin >> x;
+       // head2 = create_node(x , head2);
     }
 
-     head = addNumbers(head1 , head2);
-     print_linked_list(head);
+     //head = addNumbers(head1 , head2);
+     //print_linked_list(head);
 
      int n1;
     // cin >> n1;
@@ -316,6 +352,8 @@ int main(){
 
    // int k = 5;
 
+   head1 = rotate_LL(head1 , 2);
+   print_linked_list(head1);
 
    // vector<Node*> res = splitListToParts(head , k);
 
