@@ -264,11 +264,14 @@ Node *addNumbers(Node *head1 , Node *head2){
 
 }
 
-
-
-
 Node *rotate_LL(Node *head , int k){
+
     int len = countNodes(head);
+
+    if(k > len){
+        k = k % len;
+    }
+
     if(k == len){
         return head;
     }
@@ -286,17 +289,16 @@ Node *rotate_LL(Node *head , int k){
         ++i;
     }
 
-    cout << cur << endl;
+   // cout << cur << endl<<endl;
 
-    while(cur != NULL){
-        p -> next = cur->next;
+    p -> next = cur -> next;
+    while(p -> next != NULL){
         p = p -> next;
-        cur = cur -> next;
     }
 
+    cout << cur << endl;
 
     cur -> next = 0;
-    p = p -> next;
     p -> next = head;
 
     return dummy -> next;
@@ -319,26 +321,26 @@ int main(){
     int m;
     //cin >> m;
 
-    for(int i = 0 ; i < m ; ++i){
+    //for(int i = 0 ; i < m ; ++i){
         //int x ; cin >> x;
        // head2 = create_node(x , head2);
-    }
+    //}
 
      //head = addNumbers(head1 , head2);
      //print_linked_list(head);
 
-     int n1;
+     //int n1;
     // cin >> n1;
 
-     vector<int> nums(n1);
+     //vector<int> nums(n1);
 
-     for(int i = 0 ; i < n1 ; ++i){
+     //for(int i = 0 ; i < n1 ; ++i){
       //  cin >> nums[i];
-     }
+     //}
 
-    for(int i = 0 ; i < nums.size() ; ++i){
+    //for(int i = 0 ; i < nums.size() ; ++i){
        // head = delete_node2(nums[i] , head);
-    }
+    //}
 
    // head = delete_node3(nums , head);
 
@@ -371,3 +373,56 @@ int main(){
 
     return 0;
 }
+
+
+/*
+class Solution {
+public:
+    int countNodes(ListNode *head){
+        ListNode *tmp = head;
+        int cnt = 0;
+        while(tmp != NULL){
+           ++cnt;
+           tmp = tmp -> next;
+        }
+        return cnt;
+    }
+
+    ListNode* rotateRight(ListNode* head, int k) {
+
+    int len = countNodes(head);
+
+        if(k > len){
+            k = k % len;
+        }
+
+        if(k == len){
+            return head;
+        }
+
+        k = len - k;
+        ListNode *cur = head;
+
+        int i = 1;
+
+        ListNode *dummy = new ListNode(-1,0);
+        ListNode *p = dummy;
+
+        while(i < k && cur != NULL){
+            cur = cur -> next;
+            ++i;
+        }
+
+
+        p -> next = cur -> next;
+        while(p -> next != NULL){
+            p = p -> next;
+        }
+
+        cur -> next = 0;
+        p -> next = head;
+
+        return dummy -> next;
+    }
+};
+*/
