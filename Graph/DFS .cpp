@@ -4,6 +4,22 @@ using namespace std;
 vector <int> graph[5];
 bool visited[5];
 
+void dfs_stack(int src){
+    st.push(src);
+    while(!st.empty()){
+        int next = st.top();
+        st.pop();
+        visited[next] = 1;
+        for(int i = 0 ; i < graph[next].size() ; ++i){
+            int tmp = graph[next][i];
+            if(visited[tmp] == 0){
+                st.push(tmp);
+            }
+        }
+    }
+}
+
+
 void dfs(int source){
     visited[source] = 1;
     for (int i = 0; i < graph[source].size(); i++){
